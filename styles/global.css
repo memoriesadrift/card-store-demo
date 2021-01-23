@@ -1,0 +1,9 @@
+.card-image {
+    scale: 50%;
+    margin-top: -6rem;
+    margin-bottom: -5rem;
+}
+
+.text-tiny {
+  font-size: 10px;
+}

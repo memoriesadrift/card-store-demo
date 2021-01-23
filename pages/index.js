@@ -1,209 +1,88 @@
 import Head from 'next/head'
+import CardImage from '../components/card-image'
+import '../node_modules/uikit/dist/css/uikit.css'
 
 export default function Home() {
   return (
-    <div className="container">
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Pretend Card Store</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.min.css" />
+        <script src="../node_modules/uikit/dist/js/uikit.min.js"></script>
+        <script src="../node_modules/uikit/dist/js/uikit-icons.min.js"></script>
       </Head>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <body>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="#">Home</a></li>
+                    <li>
+                        <a href="#">Cards</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li><a href="#">Power Nine</a></li>
+                                <li><a href="#">Cards from Alpha</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">Tournaments</a></li>
+                    <li><a href="#">Customers</a></li>
+                </ul>
+            </div>
+        </nav>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div class="uk-grid uk-text-center">
+          <div class="uk-width-1-3">
+            <div><CardImage cardName={'_rand'}/></div>
+          </div>
+          <div class="uk-width-1-3">
+            <div><CardImage cardName={'_rand'}/></div>
+          </div>
+          <div class="uk-width-1-3">
+            <div><CardImage cardName={'_rand'}/></div>
+          </div>
         </div>
-      </main>
+        <div uk-grid>
+          <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-margin-top uk-margin-bottom uk-margin-left uk-margin-right">
+              <h3 class="uk-card-title">Tournaments</h3>
+              <p>View tournaments hosted at our store or host your own!</p>
+              <a class="uk-button uk-button-text" href="/tournaments">Click Here</a>
+          </div>
 
+          <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-margin-top uk-margin-bottom uk-margin-left uk-margin-right">
+            <h3 class="uk-card-title">Cards</h3>
+            <p>View our extensive stock of cards!</p>
+              <a class="uk-button uk-button-text" href="/cards">Click Here</a>
+          </div>
+
+          <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-margin-top uk-margin-bottom uk-margin-left uk-margin-right">
+            <h3 class="uk-card-title">Customers</h3>
+            <p>Our customer database.</p>
+              <a class="uk-button uk-button-text" href="/customers">Click Here</a>
+          </div>
+          
+          <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-margin-top uk-margin-bottom uk-margin-left uk-margin-right">
+            <h3 class="uk-card-title">Our Rarest Stock</h3>
+            <p>We own a couple of the most fabled cards... Come check out our Power Nine stock!</p>
+            <p>Power Nine consists of: Black Lotus, Ancestral Recall, Mox Ruby, Mox Sapphire, Mox Pearl, Mox Jet, Mox Emerald, Time Walk and Timetwister</p>
+              <a class="uk-button uk-button-text" href="/p9">Click Here</a>
+          </div>
+        </div>
+      </body>
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
+        <hr></hr>
+          <div class="uk-width-1-1 uk-text-center" uk-grid>
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-1">
+              <p class="uk-text-break">Website created by Samuel Šulovský for the DBS course in WS2020. Images provided by the wonderful <a href="https://www.scryfall.com" >Scryfall</a>. Card images are copyright Wizards of the Coast (and/or their artist, for very old sets).</p>
+              <span class="text-tiny uk-text-break">Portions of this website are unofficial Fan Content permitted under the Wizards of the Coast Fan Content Policy. The literal and graphical information presented on this site about Magic: The Gathering, including card names, sets and images is copyright Wizards of the Coast, LLC, a subsidiary of Hasbro, Inc. This website is not produced by, endorsed by, supported by, or affiliated with Wizards of the Coast. </span>
+            </div>
+          </div>
       </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
+    </>
   )
 }

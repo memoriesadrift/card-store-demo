@@ -1,0 +1,10 @@
+.list-cards {
+    color: aliceblue;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.card-image {
+    size: 50%;
+    margin: 4em;
+}
