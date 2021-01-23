@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import '../node_modules/uikit/dist/css/uikit.css'
 import CardItem from './card-item';
 
+// TODO: Move getCardData() here and pass all the card data as props!
+
 class CardList extends Component {
     constructor(props) {
         super(props);
