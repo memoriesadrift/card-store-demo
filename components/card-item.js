@@ -2,26 +2,6 @@ import React, { Component } from 'react';
 import '../node_modules/uikit/dist/css/uikit.css'
 import '../node_modules/uikit/dist/js/uikit'
 
-async function getCardData(_id) {
-    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCard.php?id=" + _id;
-    console.log("Fetching card data from: ", fetchUri);
-    let data = await fetch(fetchUri).then(response => response.json());
-    let apiUrl = "https://api.scryfall.com/cards/named?exact=" + data.NAME.replace(/\s/g, '+').replace('\'', ''); 
-    console.log("Fetching card image from: ", apiUrl)
-    const imgData = await fetch(apiUrl).then(response => response.json())
-    let order = data.ISINORDER === undefined ? "No" : data.ISINORDER;
-    return {
-        uri: imgData.image_uris.normal,
-        card: {
-            idno: data.IDNO,
-            edition: data.EDITION,
-            condition: data.CONDITION,
-            name: data.NAME,
-            isinorder: order
-        }
-    };
-}
-
 class CardItem extends Component {
     state = {
         uri: "",
@@ -34,9 +14,10 @@ class CardItem extends Component {
         }
     }
 
-    async componentDidMount() {
-        const stateData = await getCardData(this.props.cardId);
-        this.setState(stateData);
+    async componentDidUpdate() {
+        const stateData = this.props.cardData;
+        //this.setState(stateData);
+        this.setState({uri: this.props.cardData.uri})
     }
 
     render() { 
