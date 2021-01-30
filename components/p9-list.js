@@ -3,28 +3,36 @@ import React, { Component } from 'react';
 import '../node_modules/uikit/dist/css/uikit.css'
 import CardItem from './card-item';
 
-async function getCardData(_id) {
-    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCard.php?id=" + _id;
+async function getCardData() {
+    let cards = [];
+    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php?type=p9";
     console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
-    let apiUrl = "https://api.scryfall.com/cards/named?exact=" + data.NAME.replace(/\s/g, '+').replace('\'', ''); 
-    console.log("Fetching card image from: ", apiUrl)
-    const imgData = await fetch(apiUrl).then(response => response.json())
-    let order = data.ISINORDER === undefined ? "No" : data.ISINORDER;
-    let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
-    return {
-        uri: imgUri,
-        card: {
-            idno: data.IDNO,
-            edition: data.EDITION,
-            condition: data.CONDITION,
-            name: data.NAME,
-            isinorder: order
-        }
+
+    let dataArray = Object.values(data);
+    dataArray = dataArray[0]; 
+    for (const element of dataArray) {
+        console.log(element)
+        let apiUrl = "https://api.scryfall.com/cards/named?exact=" + element.NAME.replace(/\s/g, '+').replace('\'', ''); 
+        console.log("Fetching card image from: ", apiUrl)
+        let imgData = await fetch(apiUrl).then(response => response.json())
+        let order = element.ISINORDER === undefined ? "No" : element.ISINORDER;
+        let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
+        cards.push( {
+            uri: imgUri,
+            card: {
+                idno: element.IDNO,
+                edition: element.EDITION,
+                condition: element.CONDITION,
+                name: element.NAME,
+                isinorder: order
+            }})
     };
+
+    return cards;
 }
 
-class CardList extends Component {
+class P9List extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,15 +79,12 @@ class CardList extends Component {
     handleChange(event) { this.setState({pageDialog: event.target.value});}
     
     async updateCardData(_start) {
-        let cardDataNew = [];
-        for (let i = 0; i < 10; i++) {
-            cardDataNew.push(await getCardData(_start+i+1));
-        }
+        let cardDataNew = await getCardData();
         this.setState( {cardData : cardDataNew} );
     }
 
     async componentDidMount(){
-        let numRows = await fetch("http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php").then(response => response.json());
+        let numRows = await fetch("http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php?type=p9").then(response => response.json());
         numRows = Math.ceil((numRows.cards.length)/10);
         this.setState({lastPage: numRows})
         await this.updateCardData(this.state.page);
@@ -112,4 +117,4 @@ class CardList extends Component {
     }
 }
  
-export default CardList;
+export default P9List;

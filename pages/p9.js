@@ -1,13 +1,13 @@
+
 import Head from 'next/head'
-import CardSearch from '../components/card-search'
-import CardList from '../components/card-list'
+import P9List from '../components/p9-list'
 import '../node_modules/uikit/dist/css/uikit.css'
 
-export default function Cards() {
+export default function P9() {
   return (
       <>
       <Head>
-        <title>Card Stock</title>
+        <title>Power Nine</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.min.css" />
         <script src="../node_modules/uikit/dist/js/uikit.min.js"></script>
@@ -20,10 +20,10 @@ export default function Cards() {
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li>
-                        <a class="uk-active" href="#">Cards</a>
+                        <a class="uk-active" href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="/p9">Power Nine</a></li>
+                                <li><a href="#">Power Nine</a></li>
                                 <li><a href="/alpha">Cards from Alpha</a></li>
                             </ul>
                         </div>
@@ -35,10 +35,14 @@ export default function Cards() {
         </nav>
 
         <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
-        <CardSearch></CardSearch>
-
-        <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Inventory </span></h1>
-        <CardList></CardList>
+        <p class="uk-margin-right uk-margin-left">The Power Nine are a set of nine extremely rare and powerful cards. They are only legal in the Vintage format, where they are restricted to a single copy in any deck.
+            However, their illustrious status within the community remains; they are highly sought after and seen as trophies in every collection they are a part of. 
+            Oftentimes they are included in "Cubes" - or custom draft formats - where they play an important role as powerful cards that make players reconsider their game plan to accomodate the cards.
+            <br></br>Our stock of Power Nine cards changes over time. <br></br>
+            The Power Nine are: <a class="uk-link-text" href="https://scryfall.com/search?q=Ancestral+Recall">Ancestral Recall</a>, <a class="uk-link-text" href="https://scryfall.com/search?q=Black+Lotus">Black Lotus</a>, <a class="uk-link-text" href="https://scryfall.com/search?q=Mox+Emerald">Mox Emerald</a>,  <a class="uk-link-text" href="https://scryfall.com/search?q=Mox+Jet">Mox Jet</a>, <a class="uk-link-text" href="https://scryfall.com/search?q=Mox+Pearl">Mox Pearl</a>, <a class="uk-link-text" href="https://scryfall.com/search?q=Mox+Ruby">Mox Ruby</a>, <a class="uk-link-text" href="https://scryfall.com/search?q=Mox+Sapphire">Mox Sapphire</a>, <a class="uk-link-text" href="https://scryfall.com/search?q=Timetwister">Timetwister</a> and <a class="uk-link-text" href="https://scryfall.com/search?q=Time+Walk">Time Walk</a>.
+        </p>
+        <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Inventory of Power Nine Items</span></h1>
+        <P9List></P9List>
       </body>
 
       <footer>

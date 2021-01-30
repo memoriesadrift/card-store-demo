@@ -1,62 +1,65 @@
 
 import React, { Component } from 'react';
 import '../node_modules/uikit/dist/css/uikit.css'
-import CardItem from './card-item';
+import CustomerItem from '../components/customer-item'
 
-async function getCardData(_id) {
-    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCard.php?id=" + _id;
+async function getCustomerData() {
+    let customers = [];
+    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCustomers.php";
     console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
-    let apiUrl = "https://api.scryfall.com/cards/named?exact=" + data.NAME.replace(/\s/g, '+').replace('\'', ''); 
-    console.log("Fetching card image from: ", apiUrl)
-    const imgData = await fetch(apiUrl).then(response => response.json())
-    let order = data.ISINORDER === undefined ? "No" : data.ISINORDER;
-    let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
-    return {
-        uri: imgUri,
-        card: {
-            idno: data.IDNO,
-            edition: data.EDITION,
-            condition: data.CONDITION,
-            name: data.NAME,
-            isinorder: order
-        }
+    let dataArray = Object.values(data);
+    dataArray = dataArray[0]; 
+    for (const element of dataArray) {
+        customers.push( {
+            customer: {
+                dcino: element.DCINO,
+                name: element.NAME,
+                email: element.EMAIL,
+                href: "/customer/" + element.DCINO
+            }})
     };
+    
+    customers.sort((lhs, rhs) => parseInt(lhs.customer.dcino) > parseInt(rhs.customer.dcino)) 
+    return customers;
 }
 
-class CardList extends Component {
+class CustomerList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             page: 0,
             lastPage: 0,
             pageDialog: 0,
-            cardData: []
+            customerData: [],
+            displayedCustomers: []
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
    nextPage = async() => {
-       console.log("nextPage() called!");
-       await this.updateCardData(this.state.page+10);
-       this.setState(state => ({ page: state.page+10 }));
+       if(this.state.page == this.state.lastPage-1) {
+           alert('On last page!');
+           return
+       }
+       await this.updateCustomerData((this.state.page+1)*50);
+       this.setState(state => ({ page: state.page+1 }));
     }
 
    prevPage = async() => {
-       console.log("prevPage() called!");
-       if(this.state.page < 10) {
+       if(this.state.page < 1) {
            alert('On first page!');
            return
        }
-       await this.updateCardData(this.state.page-10);
-       this.setState(state => ({ page: state.page-10 }));
+       await this.updateCustomerData((this.state.page-1)*50);
+       this.setState(state => ({ page: state.page-1 }));
     }
 
    setPage = async(_pno) => {
-       let pageNum = (_pno-1)*10;
-       await this.updateCardData(pageNum);
-       this.setState({ page: pageNum });
+       _pno--;
+       await this.updateCustomerData(_pno * 50);
+       this.setState({ page: parseInt(_pno) });
     }
 
     async handleSubmit(event) {
@@ -68,29 +71,28 @@ class CardList extends Component {
         await this.setPage(this.state.pageDialog);
         event.preventDefault();
     }
+
     handleChange(event) { this.setState({pageDialog: event.target.value});}
     
-    async updateCardData(_start) {
-        let cardDataNew = [];
-        for (let i = 0; i < 10; i++) {
-            cardDataNew.push(await getCardData(_start+i+1));
-        }
-        this.setState( {cardData : cardDataNew} );
+    async updateCustomerData(_start) {
+        this.setState( {displayedCustomers : this.state.customerData.slice(_start, _start+50)} );
     }
 
     async componentDidMount(){
-        let numRows = await fetch("http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php").then(response => response.json());
-        numRows = Math.ceil((numRows.cards.length)/10);
+        let numRows = await fetch("http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCustomers.php").then(response => response.json());
+        let customers = await getCustomerData();
+        numRows = Math.ceil((numRows.customers.length)/50);
         this.setState({lastPage: numRows})
-        await this.updateCardData(this.state.page);
+        this.setState({customerData: customers})
+        await this.updateCustomerData(this.state.page);
     }
     
     render() { 
         return(
             <div>
-                <h4 class="uk-text-center">Page: {(this.state.page/10)+1}</h4>
-                <div class="uk-child-width-1-2@s uk-text-center" uk-grid="">
-                    {this.state.cardData.map(({uri, card}, idx) => <div> <CardItem key={idx} uri={uri} cardData={card} /> </div>)}
+                <h4 class="uk-text-center">Page: {this.state.page+1}</h4>
+                <div class="uk-child-width-1-2@s uk-text-center uk-margin-left uk-margin-right" uk-grid="">
+                    {this.state.displayedCustomers.map(({customer}, idx) => <div> <CustomerItem key={idx} customerData={customer} /> </div>)}
                 </div>
 
                 <div class="uk-text-center uk-margin-top">
@@ -112,4 +114,4 @@ class CardList extends Component {
     }
 }
  
-export default CardList;
+export default CustomerList;

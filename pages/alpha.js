@@ -1,13 +1,13 @@
+
 import Head from 'next/head'
-import CardSearch from '../components/card-search'
-import CardList from '../components/card-list'
+import AlphaList from '../components/alpha-list'
 import '../node_modules/uikit/dist/css/uikit.css'
 
-export default function Cards() {
+export default function Alpha() {
   return (
       <>
       <Head>
-        <title>Card Stock</title>
+        <title>Cards from Alpha</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.min.css" />
         <script src="../node_modules/uikit/dist/js/uikit.min.js"></script>
@@ -20,11 +20,11 @@ export default function Cards() {
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li>
-                        <a class="uk-active" href="#">Cards</a>
+                        <a class="uk-active" href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/p9">Power Nine</a></li>
-                                <li><a href="/alpha">Cards from Alpha</a></li>
+                                <li><a href="#">Cards from Alpha</a></li>
                             </ul>
                         </div>
                     </li>
@@ -35,10 +35,11 @@ export default function Cards() {
         </nav>
 
         <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
-        <CardSearch></CardSearch>
-
-        <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Inventory </span></h1>
-        <CardList></CardList>
+        <p class="uk-margin-right uk-margin-left uk-text-center">
+          Alpha was the very first set to ever be released, so cards from Alpha can be quite rare. So, we have decided to separate our Alpha cards out for your viewing pleasure!
+        </p>
+        <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Inventory of Alpha Cards</span></h1>
+        <AlphaList></AlphaList>
       </body>
 
       <footer>

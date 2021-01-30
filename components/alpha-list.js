@@ -3,28 +3,36 @@ import React, { Component } from 'react';
 import '../node_modules/uikit/dist/css/uikit.css'
 import CardItem from './card-item';
 
-async function getCardData(_id) {
-    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCard.php?id=" + _id;
+async function getCardData() {
+    let cards = [];
+    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php?type=alpha";
     console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
-    let apiUrl = "https://api.scryfall.com/cards/named?exact=" + data.NAME.replace(/\s/g, '+').replace('\'', ''); 
-    console.log("Fetching card image from: ", apiUrl)
-    const imgData = await fetch(apiUrl).then(response => response.json())
-    let order = data.ISINORDER === undefined ? "No" : data.ISINORDER;
-    let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
-    return {
-        uri: imgUri,
-        card: {
-            idno: data.IDNO,
-            edition: data.EDITION,
-            condition: data.CONDITION,
-            name: data.NAME,
-            isinorder: order
-        }
+
+    let dataArray = Object.values(data);
+    dataArray = dataArray[0]; 
+    for (const element of dataArray) {
+        console.log(element)
+        let apiUrl = "https://api.scryfall.com/cards/named?exact=" + element.NAME.replace(/\s/g, '+').replace('\'', ''); 
+        console.log("Fetching card image from: ", apiUrl)
+        let imgData = await fetch(apiUrl).then(response => response.json())
+        let order = element.ISINORDER === undefined ? "No" : element.ISINORDER;
+        let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
+        cards.push( {
+            uri: imgUri,
+            card: {
+                idno: element.IDNO,
+                edition: element.EDITION,
+                condition: element.CONDITION,
+                name: element.NAME,
+                isinorder: order
+            }})
     };
+
+    return cards;
 }
 
-class CardList extends Component {
+class AlphaList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,15 +79,12 @@ class CardList extends Component {
     handleChange(event) { this.setState({pageDialog: event.target.value});}
     
     async updateCardData(_start) {
-        let cardDataNew = [];
-        for (let i = 0; i < 10; i++) {
-            cardDataNew.push(await getCardData(_start+i+1));
-        }
+        let cardDataNew = await getCardData();
         this.setState( {cardData : cardDataNew} );
     }
 
     async componentDidMount(){
-        let numRows = await fetch("http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php").then(response => response.json());
+        let numRows = await fetch("http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php?type=p9").then(response => response.json());
         numRows = Math.ceil((numRows.cards.length)/10);
         this.setState({lastPage: numRows})
         await this.updateCardData(this.state.page);
@@ -88,28 +93,13 @@ class CardList extends Component {
     render() { 
         return(
             <div>
-                <h4 class="uk-text-center">Page: {(this.state.page/10)+1}</h4>
                 <div class="uk-child-width-1-2@s uk-text-center" uk-grid="">
                     {this.state.cardData.map(({uri, card}, idx) => <div> <CardItem key={idx} uri={uri} cardData={card} /> </div>)}
                 </div>
-
-                <div class="uk-text-center uk-margin-top">
-                    <button class="uk-button uk-button-default uk-button-large" onClick={this.prevPage}>Prev Page</button>  
-                    <button class="uk-button uk-button-default uk-button-large" onClick={this.nextPage}>Next Page</button>
-                </div>
-                <div class="uk-text-center uk-margin-top uk-margin-bottom">
-                    <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                        <label class="uk-margin-right-small uk width-auto"> 
-                            <input placeholder="Go To Page" class="uk-input uk-width-1-6 uk-text-center" type="number" min="1" max={this.state.lastPage}/>
-                        </label>
-                        <input class="uk-input uk-width-auto@s uk-text-center" type="submit" value="Go" />
-                    </form>
-                </div>
-
             </div>
             
         );
     }
 }
  
-export default CardList;
+export default AlphaList;

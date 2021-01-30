@@ -1,6 +1,6 @@
+
 import Head from 'next/head'
-import CardSearch from '../components/card-search'
-import CardList from '../components/card-list'
+import TournamentList from '../components/tournament-list'
 import '../node_modules/uikit/dist/css/uikit.css'
 
 export default function Cards() {
@@ -20,7 +20,7 @@ export default function Cards() {
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li>
-                        <a class="uk-active" href="#">Cards</a>
+                        <a class="uk-active" href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/p9">Power Nine</a></li>
@@ -28,17 +28,16 @@ export default function Cards() {
                             </ul>
                         </div>
                     </li>
-                    <li><a href="/tournaments">Tournaments</a></li>
+                    <li><a href="#">Tournaments</a></li>
                     <li><a href="/customers">Customers</a></li>
                 </ul>
             </div>
         </nav>
 
         <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
-        <CardSearch></CardSearch>
 
-        <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Inventory </span></h1>
-        <CardList></CardList>
+        <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Tournaments </span></h1>
+        <TournamentList></TournamentList>
       </body>
 
       <footer>

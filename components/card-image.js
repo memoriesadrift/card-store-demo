@@ -13,11 +13,11 @@ async function getImageUri(_name) {
         console.log(nameData)
         _name = nameData.NAME;
     }
-    let imgUri = "";
     let apiUrl = "https://api.scryfall.com/cards/named?exact=" + _name.replace(/\s/g, '+'); 
     console.log("Fetching card image from: ", apiUrl)
     const data = await fetch(apiUrl).then(response => response.json())
-    return data.image_uris.normal;
+    let imgUri = data.image_uris === undefined ? data.card_faces[0].image_uris.normal : data.image_uris.normal;
+    return imgUri;
 }
 
 class CardImage extends Component {
