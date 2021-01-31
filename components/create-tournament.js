@@ -17,7 +17,7 @@ class CreateTournament extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         let exists = await this.checkTournamentExists();
-        console.log("exists: ", exists)
+        //console.log("exists: ", exists)
         if (exists === true) {
             alert('Tournament with Registry No. ' + this.state.registryno +' already exists!');
             return false;
@@ -28,13 +28,13 @@ class CreateTournament extends Component {
         }
 
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/createTournament.php?no=' + this.state.registryno + "&fmt=" + this.state.format;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Created Tournament ' + this.state.registryno + ' !')).then(window.location.href = "/tournament/"+this.state.registryno);
+        await fetch(apiUri).then(res => console.log(res)).then(alert('Created Tournament ' + this.state.registryno + ' !')).then(window.location.href = "../../tournament/"+this.state.registryno);
     }
 
     async checkTournamentExists() {
         let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getTournament.php?no=" + this.state.registryno; 
         let tournamentData = await fetch(fetchUri).then(response => response.json());
-        console.log("Tournament Data: ", tournamentData);
+        //console.log("Tournament Data: ", tournamentData);
         if (tournamentData === false ) return false;
         return true;
     }

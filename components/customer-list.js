@@ -6,7 +6,7 @@ import CustomerItem from '../components/customer-item'
 async function getCustomerData() {
     let customers = [];
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCustomers.php";
-    console.log("Fetching card data from: ", fetchUri);
+    //console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
     let dataArray = Object.values(data);
     dataArray = dataArray[0]; 
@@ -16,7 +16,7 @@ async function getCustomerData() {
                 dcino: element.DCINO,
                 name: element.NAME,
                 email: element.EMAIL,
-                href: "/customer/" + element.DCINO
+                href: "../customer/" + element.DCINO
             }})
     };
     

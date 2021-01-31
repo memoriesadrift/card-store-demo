@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 
 async function getCustomerData(_dcino) {
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCustomer.php?dci=" + _dcino; 
-    console.log("calling fetch with uri: ", fetchUri);
+    //console.log("calling fetch with uri: ", fetchUri);
     let customerData = await fetch(fetchUri).then(response => response.json());
-    console.log(customerData);
+    //console.log(customerData);
     return {
         name: customerData.NAME,
         dcino: customerData.DCINO,
@@ -40,15 +40,15 @@ class CustomerCrud extends Component {
             return false;
         }
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/updateCustomer.php?oldno=' + this.state.cachedDcino + "&newno=" + this.state.dcino + "&name=" + this.state.customerName + "&email=" + this.state.email;
-        console.log("Contacting API at: ", apiUri)
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Updated Customer ' + this.state.dcino + ' !'));
+        //console.log("Contacting API at: ", apiUri)
+        await fetch(apiUri).then(alert('Updated Customer ' + this.state.dcino + ' !'));
         this.setState((state) => { return {cachedDcino: state.dcino}})
     }
 
     async deleteCustomer() {
-        console.log("deleteCustomer() called!");
+        //console.log("deleteCustomer() called!");
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/deleteCustomer.php?dcino=' + this.state.cachedDcino;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Deleted Customer ' + this.state.cachedDcino + ' !')).then(window.location.href = "/customers");
+        await fetch(apiUri).then(alert('Deleted Customer ' + this.state.cachedDcino + ' !')).then(window.location.href = "../../customers");
     }
 
     handleInputChange(event) { 

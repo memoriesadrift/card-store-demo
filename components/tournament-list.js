@@ -21,7 +21,7 @@ async function getTournamentData() {
                 format: element.FORMAT,
                 amount: amount,
                 distribution: distribution,
-                href: "/tournament/" + element.REGISTRYNO
+                href: "../tournament/" + element.REGISTRYNO
             }})
     };
     
@@ -39,7 +39,7 @@ async function getTournamentData() {
                 format: element.FORMAT,
                 amount: amount,
                 distribution: distribution,
-                href: "/tournament/" + element.REGISTRYNO
+                href: "../../tournament/" + element.REGISTRYNO
             }})
     };
 

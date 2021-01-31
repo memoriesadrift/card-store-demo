@@ -6,15 +6,15 @@ import CardItem from './card-item';
 async function getCardData() {
     let cards = [];
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCards.php?type=p9";
-    console.log("Fetching card data from: ", fetchUri);
+    //console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
 
     let dataArray = Object.values(data);
     dataArray = dataArray[0]; 
     for (const element of dataArray) {
-        console.log(element)
+        //console.log(element)
         let apiUrl = "https://api.scryfall.com/cards/named?exact=" + element.NAME.replace(/\s/g, '+').replace('\'', ''); 
-        console.log("Fetching card image from: ", apiUrl)
+        //console.log("Fetching card image from: ", apiUrl)
         let imgData = await fetch(apiUrl).then(response => response.json())
         let order = element.ISINORDER === undefined ? "No" : element.ISINORDER;
         let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
@@ -59,13 +59,13 @@ class P9List extends Component {
     }
 
    nextPage = async() => {
-       console.log("nextPage() called!");
+       //console.log("nextPage() called!");
        await this.updateCardData(this.state.page+10);
        this.setState(state => ({ page: state.page+10 }));
     }
 
    prevPage = async() => {
-       console.log("prevPage() called!");
+       //console.log("prevPage() called!");
        if(this.state.page < 10) {
            alert('On first page!');
            return

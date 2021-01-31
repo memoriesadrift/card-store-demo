@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 
 async function getTournamentData(_regno) {
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getTournament.php?no=" + _regno; 
-    console.log("calling fetch with uri: ", fetchUri);
+    //console.log("calling fetch with uri: ", fetchUri);
     let tournamentData = await fetch(fetchUri).then(response => response.json());
-    console.log(tournamentData);
+    //console.log(tournamentData);
     return {
         registryno: tournamentData.REGISTRYNO,
         format: tournamentData.FORMAT,
@@ -33,14 +33,14 @@ class TournamentCrud extends Component {
             return false;
         }
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/updateTournament.php?oldno=' + this.state.cachedRegistryno + "&newno=" + this.state.registryno + "&fmt=" + this.state.format;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Updated Tournament ' + this.state.registryno + ' !'));
+        await fetch(apiUri).then(alert('Updated Tournament ' + this.state.registryno + ' !'));
         this.setState((state) => {return {cachedRegistryno: state.registryno}})
     }
 
     async deleteTournament() {
-        console.log("deleteTournament() called!");
+        //console.log("deleteTournament() called!");
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/deleteTournament.php?no=' + this.state.registryno;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Deleted Tournament ' + this.state.registryno + ' !')).then(window.location.href = "/tournaments");
+        await fetch(apiUri).then(alert('Deleted Tournament ' + this.state.registryno + ' !')).then(window.location.href = "../../tournaments");
     }
 
     handleInputChange(event) { 

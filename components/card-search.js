@@ -6,15 +6,15 @@ import CardItem from './card-item';
 async function getCardData(_name) {
     let cards = [];
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getCard.php?name=" + _name + "%";
-    console.log("Fetching card data from: ", fetchUri);
+    //console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
 
     let dataArray = Object.values(data);
     dataArray = dataArray[0]; 
     for (const element of dataArray) {
-        console.log(element)
+        //console.log(element)
         let apiUrl = "https://api.scryfall.com/cards/named?exact=" + element.NAME.replace(/\s/g, '+').replace('\'', ''); 
-        console.log("Fetching card image from: ", apiUrl)
+        //console.log("Fetching card image from: ", apiUrl)
         let imgData = await fetch(apiUrl).then(response => response.json())
         let order = element.ISINORDER === undefined ? "No" : element.ISINORDER;
         let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
