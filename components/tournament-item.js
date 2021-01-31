@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'next/link'
 import '../node_modules/uikit/dist/css/uikit.css'
 import 'uikit'
 
@@ -17,7 +18,7 @@ class TournamentItem extends Component {
                         <p>
                             Tournament No. {this.props.tournamentData.registryno}. <br></br>
                             Prize Support: {this.props.tournamentData.amount}€ distributed between the top {this.props.tournamentData.distribution} players.<br></br>
-                            <a class="uk-button uk-button-text" href={this.props.tournamentData.href}>Click Here to Edit This Tournament</a>
+                            <Link href={this.props.tournamentData.href}><a class="uk-button uk-button-text">Click Here to Edit This Tournament</a></Link>
                         </p>
                     </div>
                 </div>

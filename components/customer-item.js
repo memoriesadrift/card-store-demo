@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'next/link'
 import '../node_modules/uikit/dist/css/uikit.css'
 import 'uikit'
 
@@ -16,7 +17,7 @@ class CustomerItem extends Component {
                         <p>
                             DCI Number: {this.props.customerData.dcino}<br></br>
                             E-Mail: {this.props.customerData.email}<br></br>
-                            <a class="uk-button uk-button-text" href={this.props.customerData.href}>Click Here to Edit This Customer</a>
+                            <Link href={this.props.customerData.href}><a class="uk-button uk-button-text">Click Here to Edit This Customer</a></Link>
                         </p>
                     </div>
                 </div>

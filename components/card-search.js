@@ -18,6 +18,17 @@ async function getCardData(_name) {
         let imgData = await fetch(apiUrl).then(response => response.json())
         let order = element.ISINORDER === undefined ? "No" : element.ISINORDER;
         let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
+        fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getFoilCard.php?id=" + element.IDNO;
+        let foilData = await fetch(fetchUri).then(response => response.json());
+        let foiling = "";
+        let curling = "";
+        if(foilData === false) {
+            foiling = "Not Foil";
+            curling = "N/A";
+        } else {
+            foiling = "Foil";
+            curling = foilData.CURLING;
+        }
         cards.push( {
             uri: imgUri,
             card: {
@@ -25,7 +36,9 @@ async function getCardData(_name) {
                 edition: element.EDITION,
                 condition: element.CONDITION,
                 name: element.NAME,
-                isinorder: order
+                isinorder: order,
+                foil: foiling,
+                curling: curling
             }})
     };
 
