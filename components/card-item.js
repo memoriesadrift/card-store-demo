@@ -17,7 +17,7 @@ class CardItem extends Component {
                 <div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">{this.props.cardData.name}</h3>
-                        <p>{this.props.cardData.edition} — {this.props.cardData.condition} <br></br> Contact us for a price offer!</p>
+                        <p>{this.props.cardData.edition} — {this.props.cardData.condition} <br></br> {this.props.cardData.foil}, Curling: {this.props.cardData.curling} <br></br>Contact us for a price offer!</p>
                         <p class="text-tiny">Internal information: ID: {this.props.cardData.idno}, In Order: {this.props.cardData.isinorder}</p>
                     </div>
                 </div>

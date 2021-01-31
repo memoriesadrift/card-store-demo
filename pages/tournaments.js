@@ -7,7 +7,7 @@ export default function Cards() {
   return (
       <>
       <Head>
-        <title>Card Stock</title>
+        <title>Tournaments</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.min.css" />
         <script src="../node_modules/uikit/dist/js/uikit.min.js"></script>
@@ -20,7 +20,7 @@ export default function Cards() {
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li>
-                        <a class="uk-active" href="/cards">Cards</a>
+                        <a href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/p9">Power Nine</a></li>
@@ -28,14 +28,16 @@ export default function Cards() {
                             </ul>
                         </div>
                     </li>
-                    <li><a href="#">Tournaments</a></li>
+                    <li class="uk-active"><a href="#">Tournaments</a></li>
                     <li><a href="/customers">Customers</a></li>
                 </ul>
             </div>
         </nav>
 
         <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
-
+        <div class="uk-text-center">
+            <a class="uk-button uk-button-large uk-width-auto uk-button-default uk-margin uk-text-center" href="/tournament/create">Create a Tournament</a>
+        </div>
         <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Tournaments </span></h1>
         <TournamentList></TournamentList>
       </body>

@@ -1,11 +1,7 @@
-import { useClientRouter } from 'use-client-router'
 import Head from 'next/head'
-import TournamentCrud from '../../components/tournament-crud'
+import CreateTournament from '../../components/create-tournament'
 
-const Tournament = () => {
-  const router = useClientRouter()
-  const { regno } = router.query
-
+const Create = () => {
   return (
       <>
         <Head>
@@ -40,10 +36,10 @@ const Tournament = () => {
             <div class="uk-text-center">
                 <a class="uk-button uk-button-large uk-width-auto uk-button-default uk-margin uk-text-center" href="/tournaments">Back to Tournaments</a>
             </div>
-            <TournamentCrud regno={regno}></TournamentCrud>
+            <CreateTournament></CreateTournament>
         </body>
       </>
   ) 
 }
 
-export default Tournament;
+export default Create;

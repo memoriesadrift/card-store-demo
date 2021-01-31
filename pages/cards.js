@@ -19,8 +19,8 @@ export default function Cards() {
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li>
-                        <a class="uk-active" href="#">Cards</a>
+                    <li class="uk-active">
+                        <a href="#">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/p9">Power Nine</a></li>

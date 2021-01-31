@@ -47,7 +47,7 @@ export default function Home() {
             <div><CardImage cardName={'_rand'}/></div>
           </div>
         </div>
-        <div uk-grid="">
+        <div uk-grid="" class="uk-margin-left">
           <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-margin-top uk-margin-bottom uk-margin-left uk-margin-right uk-width-1-1">
               <h3 class="uk-card-title">Tournaments</h3>
               <p>View tournaments hosted at our store or host your own!</p>

@@ -19,7 +19,7 @@ export default function Cards() {
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li>
-                        <a class="uk-active" href="/cards">Cards</a>
+                        <a href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/p9">Power Nine</a></li>
@@ -28,13 +28,15 @@ export default function Cards() {
                         </div>
                     </li>
                     <li><a href="/tournaments">Tournaments</a></li>
-                    <li><a href="#">Customers</a></li>
+                    <li class="uk-active"><a href="#">Customers</a></li>
                 </ul>
             </div>
         </nav>
 
         <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
-
+        <div class="uk-text-center">
+          <a class="uk-button uk-button-large uk-width-auto uk-button-default uk-margin uk-text-center" href="/customer/create">Create a Customer Profile</a>
+        </div>
         <h1 class="uk-heading-line uk-text-center uk-margin-top"><span> Our Customers </span></h1>
         <CustomerList></CustomerList>
       </body>

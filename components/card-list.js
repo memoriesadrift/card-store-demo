@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import '../node_modules/uikit/dist/css/uikit.css'
 import CardItem from './card-item';
@@ -12,6 +11,17 @@ async function getCardData(_id) {
     const imgData = await fetch(apiUrl).then(response => response.json())
     let order = data.ISINORDER === undefined ? "No" : data.ISINORDER;
     let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;
+    fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getFoilCard.php?id=" + _id;
+    let foilData = await fetch(fetchUri).then(response => response.json());
+    let foiling = "";
+    let curling = "";
+    if(foilData === false) {
+        foiling = "Not Foil";
+        curling = "N/A";
+    } else {
+        foiling = "Foil";
+        curling = foilData.CURLING;
+    }
     return {
         uri: imgUri,
         card: {
@@ -19,7 +29,9 @@ async function getCardData(_id) {
             edition: data.EDITION,
             condition: data.CONDITION,
             name: data.NAME,
-            isinorder: order
+            isinorder: order,
+            foil: foiling,
+            curling: curling
         }
     };
 }

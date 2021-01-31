@@ -19,11 +19,11 @@ export default function P9() {
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li>
-                        <a class="uk-active" href="/cards">Cards</a>
+                    <li class="uk-active">
+                        <a href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="#">Power Nine</a></li>
+                                <li class="uk-active"><a href="#">Power Nine</a></li>
                                 <li><a href="/alpha">Cards from Alpha</a></li>
                             </ul>
                         </div>

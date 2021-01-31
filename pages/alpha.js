@@ -19,12 +19,12 @@ export default function Alpha() {
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li>
-                        <a class="uk-active" href="/cards">Cards</a>
+                    <li class="uk-active">
+                        <a href="/cards">Cards</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/p9">Power Nine</a></li>
-                                <li><a href="#">Cards from Alpha</a></li>
+                                <li class="uk-active"><a href="#">Cards from Alpha</a></li>
                             </ul>
                         </div>
                     </li>

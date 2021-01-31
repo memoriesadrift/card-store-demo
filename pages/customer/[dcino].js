@@ -31,7 +31,7 @@ const Customer = () => {
                             </div>
                         </li>
                         <li><a href="/tournaments">Tournaments</a></li>
-                        <li><a class="uk-active" href="/customers">Customers</a></li>
+                        <li class="uk-active"><a href="/customers">Customers</a></li>
                     </ul>
                 </div>
             </nav>

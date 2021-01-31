@@ -2,45 +2,41 @@ import '../node_modules/uikit/dist/css/uikit.css'
 import 'uikit'
 import React, { Component } from 'react';
 
-async function getTournamentData(_regno) {
-    let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getTournament.php?no=" + _regno; 
-    console.log("calling fetch with uri: ", fetchUri);
-    let tournamentData = await fetch(fetchUri).then(response => response.json());
-    console.log(tournamentData);
-    return {
-        registryno: tournamentData.REGISTRYNO,
-        format: tournamentData.FORMAT,
-    }
-}
 
-class TournamentCrud extends Component {
+class CreateTournament extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            cachedRegistryno: NaN,
-            registryno: NaN,
+            registryno: 0,
             format: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.deleteTournament = this.deleteTournament.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
     
     async handleSubmit(event) {
         event.preventDefault();
+        let exists = await this.checkTournamentExists();
+        console.log("exists: ", exists)
+        if (exists === true) {
+            alert('Tournament with Registry No. ' + this.state.registryno +' already exists!');
+            return false;
+        }
         if (this.state.registryno < 1) {
             alert("Registry No. can't be less than 1!");
             return false;
         }
-        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/updateTournament.php?oldno=' + this.state.cachedRegistryno + "&newno=" + this.state.registryno + "&fmt=" + this.state.format;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Updated Tournament ' + this.state.registryno + ' !'));
-        this.setState((state) => {return {cachedRegistryno: state.registryno}})
+
+        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/createTournament.php?no=' + this.state.registryno + "&fmt=" + this.state.format;
+        await fetch(apiUri).then(res => console.log(res)).then(alert('Created Tournament ' + this.state.registryno + ' !')).then(window.location.href = "/tournament/"+this.state.registryno);
     }
 
-    async deleteTournament() {
-        console.log("deleteTournament() called!");
-        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/deleteTournament.php?no=' + this.state.registryno;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Deleted Tournament ' + this.state.registryno + ' !')).then(window.location.href = "/tournaments");
+    async checkTournamentExists() {
+        let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getTournament.php?no=" + this.state.registryno; 
+        let tournamentData = await fetch(fetchUri).then(response => response.json());
+        console.log("Tournament Data: ", tournamentData);
+        if (tournamentData === false ) return false;
+        return true;
     }
 
     handleInputChange(event) { 
@@ -50,15 +46,6 @@ class TournamentCrud extends Component {
 
         this.setState({
             [name]: value
-        })
-    }
-
-    async componentDidMount() {
-        let tournamentData = await getTournamentData(this.props.regno);
-        this.setState({
-            cachedRegistryno: tournamentData.registryno,
-            registryno: tournamentData.registryno,
-            format: tournamentData.format
         })
     }
 
@@ -94,11 +81,10 @@ class TournamentCrud extends Component {
                             </div>
 
                             <div class="uk-margin"> 
-                                <input class="uk-input uk-width-auto@s uk-text-center" type="submit" value="Update" />
+                                <input class="uk-input uk-width-auto@s uk-text-center" type="submit" value="Create" />
                             </div>
                         </form>
 
-                        <button class="uk-button uk-button-danger uk-button-large" onClick={this.deleteTournament}>Delete This Tournament</button>  
 
                     </div>
                 </div>
@@ -107,4 +93,4 @@ class TournamentCrud extends Component {
     }
 }
  
-export default TournamentCrud;
+export default CreateTournament;

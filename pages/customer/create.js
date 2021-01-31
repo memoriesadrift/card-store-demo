@@ -1,15 +1,11 @@
-import { useClientRouter } from 'use-client-router'
 import Head from 'next/head'
-import TournamentCrud from '../../components/tournament-crud'
+import CreateCustomer from '../../components/create-customer'
 
-const Tournament = () => {
-  const router = useClientRouter()
-  const { regno } = router.query
-
+const Create = () => {
   return (
       <>
         <Head>
-            <title>Tournament Record</title>
+            <title>Customer Record</title>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.min.css" />
             <script src="../node_modules/uikit/dist/js/uikit.min.js"></script>
@@ -30,20 +26,20 @@ const Tournament = () => {
                                 </ul>
                             </div>
                         </li>
-                        <li class="uk-active"><a href="/tournaments">Tournaments</a></li>
-                        <li><a href="/customers">Customers</a></li>
+                        <li><a href="/tournaments">Tournaments</a></li>
+                        <li class="uk-active"><a class="uk-active" href="/customers">Customers</a></li>
                     </ul>
                 </div>
             </nav>
 
             <h1 class="uk-heading-line uk-text-center"><span> Pretend Card Store </span></h1>
             <div class="uk-text-center">
-                <a class="uk-button uk-button-large uk-width-auto uk-button-default uk-margin uk-text-center" href="/tournaments">Back to Tournaments</a>
+                <a class="uk-button uk-button-large uk-width-auto uk-button-default uk-margin uk-text-center" href="/customers">Back to Customers</a>
             </div>
-            <TournamentCrud regno={regno}></TournamentCrud>
+            <CreateCustomer></CreateCustomer>
         </body>
       </>
   ) 
 }
 
-export default Tournament;
+export default Create;
