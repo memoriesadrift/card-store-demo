@@ -28,7 +28,7 @@ class CreateTournament extends Component {
         }
 
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/createTournament.php?no=' + this.state.registryno + "&fmt=" + this.state.format;
-        await fetch(apiUri).then(res => console.log(res)).then(alert('Created Tournament ' + this.state.registryno + ' !')).then(window.location.href = "../../tournament/"+this.state.registryno);
+        await fetch(apiUri).then(res => console.log(res)).then(alert('Created Tournament ' + this.state.registryno + ' !')).then(window.location.href = "../tournament/"+this.state.registryno);
     }
 
     async checkTournamentExists() {

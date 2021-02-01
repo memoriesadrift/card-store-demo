@@ -48,7 +48,7 @@ class CustomerCrud extends Component {
     async deleteCustomer() {
         //console.log("deleteCustomer() called!");
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/deleteCustomer.php?dcino=' + this.state.cachedDcino;
-        await fetch(apiUri).then(alert('Deleted Customer ' + this.state.cachedDcino + ' !')).then(window.location.href = "../../customers");
+        await fetch(apiUri).then(alert('Deleted Customer ' + this.state.cachedDcino + ' !')).then(window.location.href = "../customers");
     }
 
     handleInputChange(event) { 

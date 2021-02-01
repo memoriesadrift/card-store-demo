@@ -14,17 +14,17 @@ export default function Cards() {
         <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar="">
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">
-                    <li><Link href="../"><a>Home</a></Link></li>
+                    <li><Link href="./"><a>Home</a></Link></li>
                     <li>
-                        <Link href="../cards"><a>Cards</a></Link>
+                        <Link href="./cards"><a>Cards</a></Link>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><Link href="../p9"><a>Power Nine</a></Link></li>
-                                <li><Link href="../alpha"><a>Cards from Alpha</a></Link></li>
+                                <li><Link href="./p9"><a>Power Nine</a></Link></li>
+                                <li><Link href="./alpha"><a>Cards from Alpha</a></Link></li>
                             </ul>
                         </div>
                     </li>
-                    <li><Link href="../tournaments"><a>Tournaments</a></Link></li>
+                    <li><Link href="./tournaments"><a>Tournaments</a></Link></li>
                     <li class="uk-active"><Link href="#"><a>Customers</a></Link></li>
                 </ul>
             </div>

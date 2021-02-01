@@ -40,7 +40,7 @@ class TournamentCrud extends Component {
     async deleteTournament() {
         //console.log("deleteTournament() called!");
         let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/deleteTournament.php?no=' + this.state.registryno;
-        await fetch(apiUri).then(alert('Deleted Tournament ' + this.state.registryno + ' !')).then(window.location.href = "../../tournaments");
+        await fetch(apiUri).then(alert('Deleted Tournament ' + this.state.registryno + ' !')).then(window.location.href = "../tournaments");
     }
 
     handleInputChange(event) { 
