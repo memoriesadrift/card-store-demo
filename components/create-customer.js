@@ -26,7 +26,7 @@ class CreateCustomer extends Component {
         }
         let apiUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/createCustomer.php?name=" + this.state.customerName + "&email=" + this.state.email;
         //console.log("Contacting API at: ", apiUri)
-        await fetch(apiUri).then(alert('Created Customer! You can find it at the end of the customers page.')).then(window.location.href = "../customers");
+        await fetch(apiUri).then(alert('Created Customer! You can find it at the end of the customers page.')).then(window.location.href = "http://wwwlab.cs.univie.ac.at/~sulovskys00/card-store/customers");
     }
 
     handleInputChange(event) { 

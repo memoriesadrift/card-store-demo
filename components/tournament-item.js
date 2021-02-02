@@ -18,7 +18,7 @@ class TournamentItem extends Component {
                         <p>
                             Tournament No. {this.props.tournamentData.registryno}. <br></br>
                             Prize Support: {this.props.tournamentData.amount}€ distributed between the top {this.props.tournamentData.distribution} players.<br></br>
-                            <Link href={this.props.tournamentData.href}><a class="uk-button uk-button-text">Click Here to Edit This Tournament</a></Link>
+                            <Link href="../tournament/[regno]" as={`../tournament/${this.props.tournamentData.registryno}`}><a class="uk-button uk-button-text">Click Here to Edit This Tournament</a></Link>
                         </p>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ async function getCustomerData() {
                 dcino: element.DCINO,
                 name: element.NAME,
                 email: element.EMAIL,
-                href: "./customer/" + element.DCINO
+                href: "/customer/" + element.DCINO
             }})
     };
     
