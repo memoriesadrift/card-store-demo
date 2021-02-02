@@ -4,12 +4,13 @@ import React, { Component } from 'react';
 
 async function getTournamentData(_regno) {
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getTournament.php?no=" + _regno; 
-    //console.log("calling fetch with uri: ", fetchUri);
+    console.log("calling fetch with uri: ", fetchUri);
     let tournamentData = await fetch(fetchUri).then(response => response.json());
-    //console.log(tournamentData);
+    console.log(tournamentData);
     return {
         registryno: tournamentData.REGISTRYNO,
         format: tournamentData.FORMAT,
+        entryfee: tournamentData.ENTRYFEE
     }
 }
 
@@ -19,6 +20,7 @@ class TournamentCrud extends Component {
         this.state = { 
             cachedRegistryno: NaN,
             registryno: NaN,
+            entryfee: NaN,
             format: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,7 +34,11 @@ class TournamentCrud extends Component {
             alert("Registry No. can't be less than 1!");
             return false;
         }
-        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/updateTournament.php?oldno=' + this.state.cachedRegistryno + "&newno=" + this.state.registryno + "&fmt=" + this.state.format;
+        if (this.state.entryfee < 0) {
+            alert("Fee can't be less than 0!");
+            return false;
+        }
+        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/updateTournament.php?oldno=' + this.state.cachedRegistryno + "&newno=" + this.state.registryno + "&fmt=" + this.state.format + "&newfee=" + this.state.entryfee;
         await fetch(apiUri).then(alert('Updated Tournament ' + this.state.registryno + ' !'));
         this.setState((state) => {return {cachedRegistryno: state.registryno}})
     }
@@ -58,6 +64,7 @@ class TournamentCrud extends Component {
         this.setState({
             cachedRegistryno: tournamentData.registryno,
             registryno: tournamentData.registryno,
+            entryfee: tournamentData.entryfee,
             format: tournamentData.format
         })
     }
@@ -73,6 +80,13 @@ class TournamentCrud extends Component {
                                 <label class="uk-form-label" for="form-stacked-text">Registry No.</label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="form-stacked-text" type="number" name="registryno" onChange={this.handleInputChange} placeholder="Loading..." value={this.state.registryno}></input>
+                                </div>
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Entry Fee in Euro</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="form-stacked-text" type="number" name="entryfee" onChange={this.handleInputChange} placeholder="Loading..." value={this.state.entryfee}></input>
                                 </div>
                             </div>
                             

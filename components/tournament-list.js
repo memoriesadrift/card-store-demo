@@ -8,7 +8,7 @@ async function getTournamentData() {
     let tournaments = [];
 
     let fetchUri = "http://wwwlab.cs.univie.ac.at/~sulovskys00/api/getTournaments.php?prizes=yes";
-    //console.log("Fetching card data from: ", fetchUri);
+    console.log("Fetching card data from: ", fetchUri);
     let data = await fetch(fetchUri).then(response => response.json());
     let dataArray = Object.values(data);
     dataArray = dataArray[0]; 
@@ -20,6 +20,7 @@ async function getTournamentData() {
                 registryno: element.REGISTRYNO,
                 format: element.FORMAT,
                 amount: amount,
+                entryfee: element.ENTRYFEE,
                 distribution: distribution,
                 href: "/tournament/" + element.REGISTRYNO
             }})
@@ -38,12 +39,14 @@ async function getTournamentData() {
                 registryno: element.REGISTRYNO,
                 format: element.FORMAT,
                 amount: amount,
+                entryfee: element.ENTRYFEE,
                 distribution: distribution,
                 href: "/tournament/" + element.REGISTRYNO
             }})
     };
 
-    tournaments.sort((lhs, rhs) => parseInt(lhs.tournament.registryno) > parseInt(rhs.tournament.registryno)) 
+    tournaments.sort((lhs, rhs) => parseInt(lhs.tournament.registryno) > parseInt(rhs.tournament.registryno))
+    console.log(tournaments);
     return tournaments;
 }
 

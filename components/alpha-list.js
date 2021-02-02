@@ -14,7 +14,7 @@ async function getCardData() {
     for (const element of dataArray) {
         //console.log(element)
         let apiUrl = "https://api.scryfall.com/cards/named?exact=" + element.NAME.replace(/\s/g, '+').replace('\'', ''); 
-        //console.log("Fetching card image from: ", apiUrl)
+        console.log("Fetching card image from: ", apiUrl)
         let imgData = await fetch(apiUrl).then(response => response.json())
         let order = element.ISINORDER === undefined ? "No" : element.ISINORDER;
         let imgUri = imgData.image_uris === undefined ? imgData.card_faces[0].image_uris.normal : imgData.image_uris.normal;

@@ -8,6 +8,7 @@ class CreateTournament extends Component {
         super(props);
         this.state = { 
             registryno: 0,
+            fee: 0,
             format: 'Legacy'
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,8 +27,12 @@ class CreateTournament extends Component {
             alert("Registry No. can't be less than 1!");
             return false;
         }
+        if (this.state.fee < 0) {
+            alert("Fee can't be less than 1!");
+            return false;
+        }
 
-        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/createTournament.php?no=' + this.state.registryno + "&fmt=" + this.state.format;
+        let apiUri = 'http://wwwlab.cs.univie.ac.at/~sulovskys00/api/createTournament.php?no=' + this.state.registryno + "&fmt=" + this.state.format + "&fee=" + this.state.fee;
         await fetch(apiUri).then(res => console.log(res)).then(alert('Created Tournament ' + this.state.registryno + ' !')).then(window.location.href = "http://wwwlab.cs.univie.ac.at/~sulovskys00/card-store/tournaments");
     }
 
@@ -60,6 +65,13 @@ class CreateTournament extends Component {
                                 <label class="uk-form-label" for="form-stacked-text">Registry No.</label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="form-stacked-text" type="number" name="registryno" onChange={this.handleInputChange} placeholder="Loading..." value={this.state.registryno}></input>
+                                </div>
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Entry Fee in Euro</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="form-stacked-text" type="number" name="fee" onChange={this.handleInputChange} placeholder="Loading..." value={this.state.fee}></input>
                                 </div>
                             </div>
                             
